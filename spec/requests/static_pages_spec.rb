@@ -19,23 +19,26 @@ describe 'Static pages' do
 
   describe 'Help page' do
     before(:each) { visit help_path }
+    let(:heading) { 'Help' }
+    let(:page_title) { 'Help' }
 
-    it { should have_selector('h1', text: 'Help') }
-    it { should have_title(full_title('Help')) }
+    it_should_behave_like 'all static pages'
   end
 
   describe 'About page' do
     before(:each) { visit about_path }
+    let(:heading) { 'About' }
+    let(:page_title) { 'About' }
 
-    it { should have_selector('h1', text: 'About') }
-    it { should have_title(full_title('About')) }
+    it_should_behave_like 'all static pages'
   end
 
   describe 'Contact page' do
     before(:each) { visit contact_path }
+    let(:heading) { 'Contact' }
+    let(:page_title) { 'Contact' }
 
-    it { should have_selector('h1', text: 'Contact') }
-    it { should have_title(full_title('Contact')) }
+    it_should_behave_like 'all static pages'
   end
 
 end
