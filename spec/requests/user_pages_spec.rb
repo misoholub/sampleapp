@@ -51,10 +51,10 @@ describe 'UserPages' do
 
       describe 'after saving the user' do
         before { click_button submit }
-        let(:user) { User.find_by(email: 'michal@test.example.sk') }
+        let(:user) { User.find_by(email: 'user@example.com') }
 
         it { should have_title(user.name) }
-        it { should have_selector('div.alert.alert-success', text: 'Welcomeee') }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome to the Sample App') }
       end
 
     end
