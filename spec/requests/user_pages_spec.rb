@@ -98,10 +98,11 @@ describe 'UserPages' do
   end
 
   describe 'index' do
+
+    let(:user) { FactoryGirl.create(:user) }
+
     before do
-      valid_signin FactoryGirl.create(:user)
-      FactoryGirl.create(:user, name: 'Bob', email: 'bob@example.com')
-      FactoryGirl.create(:user, name: 'Ted', email: 'ted@example.com')
+      valid_signin(user)
       visit users_path
     end
 
@@ -119,6 +120,28 @@ describe 'UserPages' do
           expect(page).to have_selector('li', text: u.name)
         end
       end
+    end
+
+    describe 'delete links' do
+      it { should_not have_link('delete') }
+
+      describe 'as an admin user' do
+        let(:admin) { FactoryGirl.create(:admin) }
+        before do
+          valid_signin(admin)
+          visit users_path
+        end
+
+        it { should have_link('delete', href: user_path(User.first)) }
+        it 'should be able to delete another user' do
+          expect do
+            click_link('delete', match: :first)
+          end.to change(User, :count).by(-1)
+        end
+        it { should_not have_link('delete', href: user_path(admin)) }
+
+      end
+
     end
 
   end
