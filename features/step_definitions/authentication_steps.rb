@@ -7,7 +7,7 @@ When /^he submits invalid signin information$/ do
 end
 
 Then /^he should see an error message$/ do
-  expect(page).to have_selector('div.alert.alert-error')
+  expect(page).to have_selector('div.alert.alert-error', text: 'Invalid')
 end
 
 Given /^the user has an account$/ do
