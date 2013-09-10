@@ -9,6 +9,9 @@ describe "Authentication" do
 
     it { should have_content('Sign in') }
     it { should have_title('Sign in') }
+    it { should_not have_link('Sign out') }
+    it { should_not have_link('Profile') }
+    it { should_not have_link('Settings') }
   end
 
   describe 'signin' do
@@ -40,6 +43,9 @@ describe "Authentication" do
       describe 'followed by signout' do
         before { click_link 'Sign out' }
         it { should have_link('Sign in') }
+        it { should_not have_link('Sign out') }
+        it { should_not have_link('Profile') }
+        it { should_not have_link('Settings') }
       end
 
     end
